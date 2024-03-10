@@ -29,11 +29,7 @@ public class Produto {
     }
     public double getPreco() {return preco;}
     public void setQuantidadeEstoque(int quantidadeEstoque) {
-        if (quantidadeEstoque < 0) {
-            this.quantidadeEstoque = 0;
-        }else {
-            this.quantidadeEstoque = quantidadeEstoque;
-        }
+        this.quantidadeEstoque = Math.max(quantidadeEstoque, 0);
 
     }
     public int getQuantidadeEstoque() { return quantidadeEstoque;}

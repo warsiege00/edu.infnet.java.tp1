@@ -19,6 +19,12 @@ class ProdutoTest {
     }
 
     @Test
+    public void verificaId() {
+        int novoId = 100;
+        produto.setId(novoId);
+        assertEquals(novoId, produto.getId());
+    }
+    @Test
     public void verificaNomeNaoNull() {
         produto.setNome(null);
         assertEquals("", produto.getNome());
