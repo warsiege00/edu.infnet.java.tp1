@@ -4,7 +4,9 @@ import java.util.Collection;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,6 +29,16 @@ public class ProdutoController {
 	public Collection<Produto> obterLista(){
 		return produtoService.obterTodos();
     }
+
+    @GetMapping(value = "/{id}")
+	public Produto obterPorId(@PathVariable Integer id){
+		return produtoService.obterPorId(id);
+    }
+
+    @DeleteMapping(value = "/{id}/excluir")
+	public void excluir(@PathVariable Integer id) {
+		produtoService.excluir(id);
+	}
 
 
 }
