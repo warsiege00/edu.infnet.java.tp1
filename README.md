@@ -5,6 +5,12 @@
 Este projeto foi pensado em um contexto de gerenciamento de produtos desenvolvido como parte do
 curso de Engenharia de Software do instituo INFNET. O sistema permite a criação e visualização de produtos, além de fornecer funcionalidades para calcular o valor total do estoque.
 
+##Releases
+TP1 e TP2
+https://github.com/warsiege00/edu.infnet.java.tp1/commit/a47052cf77efa260dc879de98f2133e328496d7e
+TP3
+Em andamento
+
 ## Tecnologias Utilizadas
 
 - Java
