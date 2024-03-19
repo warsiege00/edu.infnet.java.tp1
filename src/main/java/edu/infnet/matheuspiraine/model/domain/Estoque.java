@@ -1,14 +1,15 @@
 package edu.infnet.matheuspiraine.model.domain;
 
-import java.util.Collection;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.transaction.Transactional;
-
-
 
 @Entity
 @Transactional
@@ -18,13 +19,18 @@ public class Estoque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
-    // @Transient
-    // private Loja loja;
-    @ManyToMany(mappedBy = "estoques") // Especifica o campo na classe Produto que mapeia a relação
-    private Collection<Produto> produtos;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "idEstoque")
+    private List<Produto> produtos;
     private String descricao;
 
     public Estoque(){}
+
+    public Estoque(String nome){
+        this();
+        setNome(nome);
+    }
 
     public Integer getId() {
         return id;
@@ -43,16 +49,11 @@ public class Estoque {
     }
     public String getDescricao() { return descricao;}
     
-    public Collection<Produto> getProdutos() {
+    public List<Produto> getProdutos() {
 		return produtos;
 	}
-	public void setProdutos(Collection<Produto> produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 
-    public void adicionarProduto(Produto produto) {
-        this.produtos.add(produto);
-        produto.getEstoque().add(this);
-    }
-    //CALCULAR VALOR TOTAL ESTOQUE
 }

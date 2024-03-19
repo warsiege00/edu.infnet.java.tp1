@@ -1,6 +1,6 @@
 package edu.infnet.matheuspiraine.controller;
 
-import java.util.Collection;
+import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import edu.infnet.matheuspiraine.model.domain.Estoque;
-import edu.infnet.matheuspiraine.model.domain.Produto;
 import edu.infnet.matheuspiraine.model.service.EstoqueService;
 
 
@@ -28,7 +27,7 @@ public class EstoqueController {
     }
 
     @GetMapping(value = "/listar")
-	public Collection<Estoque> obterLista(){
+	public List<Estoque> obterLista(){
 		return estoqueService.obterTodos();
     }
 
@@ -40,20 +39,6 @@ public class EstoqueController {
     @DeleteMapping(value = "/{id}/excluir")
 	public void excluir(@PathVariable Integer id) {
 		estoqueService.excluir(id);
-    }
-    
-    @PostMapping(value = "{estoqueId}/produtos/adicionar")
-    public void adicionarProduto(
-        @PathVariable Integer estoqueId,
-        @RequestBody Integer produtoId){
-        
-        estoqueService.adicionarProdutoAoEstoque(estoqueId, produtoId);
-    }
-
-    @GetMapping(value = "{estoqueId}/produtos")
-	public Collection<Produto> obterProdutos(
-        @PathVariable Integer estoqueId ){
-		    return estoqueService.obterProdutos(estoqueId);
     }
 
 }

@@ -1,10 +1,10 @@
 package edu.infnet.matheuspiraine.model.service;
 
-import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
-
 import edu.infnet.matheuspiraine.model.domain.Produto;
 import edu.infnet.matheuspiraine.model.repository.ProdutoRepository;
 
@@ -18,9 +18,11 @@ public class ProdutoService {
         produtoRepository.save(produto);
     }
 
-    public Collection<Produto> obterTodos(){
-        return (Collection<Produto>) produtoRepository.findAll();
+    public List<Produto> obterProdutosPorEstoque(Integer estoqueId){
+        return (List<Produto>) produtoRepository
+            .findByEstoqueId(estoqueId);
     }
+    
 
     public Produto obterPorId(Integer id){
         Produto produto = produtoRepository
@@ -28,7 +30,6 @@ public class ProdutoService {
             .orElseThrow(EntityNotFoundException::new);
             return produto;
     }
-
     public void excluir(Integer id){
         produtoRepository.deleteById(id);
     }

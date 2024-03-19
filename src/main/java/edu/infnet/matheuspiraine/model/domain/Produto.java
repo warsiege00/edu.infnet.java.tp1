@@ -1,14 +1,15 @@
 package edu.infnet.matheuspiraine.model.domain;
 
-import java.util.Collection;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Transactional
@@ -19,15 +20,18 @@ public class Produto {
     private Integer id;
     private String nome;
     private Double preco;
-    @ManyToMany
-    private Collection<Estoque> estoques;
+    
+    @ManyToOne
+    @JoinColumn(name = "idEstoque")
+    @JsonBackReference
+    Estoque estoque;
 
     public Produto(){}
 
     public Produto(String nome, Double preco){
         this();
-        this.nome = nome;
-        this.preco = preco;
+        setNome(nome);
+        setPreco(preco);
     }
    
     public Integer getId() {
@@ -47,15 +51,11 @@ public class Produto {
     }
     public Double getPreco() {return preco;}
 
-    public void setEstoque(Collection<Estoque> estoques) {
-        this.estoques = estoques;
+    public Estoque getEstoque(){
+        return estoque;
     }
-    public Collection<Estoque> getEstoque() {return estoques;}
-
-    public void imprimirInformacoes() {
-        System.out.println("ID: " + id);
-        System.out.println("Nome: " + nome);
-        System.out.println("Preço: " + preco);
+    public void setEstoque(Estoque estoque){
+        this.estoque = estoque;
     }
 
 }

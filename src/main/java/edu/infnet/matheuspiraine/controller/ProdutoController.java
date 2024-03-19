@@ -1,6 +1,6 @@
 package edu.infnet.matheuspiraine.controller;
 
-import java.util.Collection;
+import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +25,9 @@ public class ProdutoController {
         produtoService.criar(produto);
     }
 
-    @GetMapping(value = "/listar")
-	public Collection<Produto> obterLista(){
-		return produtoService.obterTodos();
+    @GetMapping(value = "/listar/{estoqueId}")
+	public List<Produto> obterProdutosPorEstoque(@PathVariable Integer estoqueId){
+		return produtoService.obterProdutosPorEstoque(estoqueId);
     }
 
     @GetMapping(value = "/{id}")
